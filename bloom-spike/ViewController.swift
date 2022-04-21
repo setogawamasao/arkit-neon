@@ -15,10 +15,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
         sceneView.delegate = self
-        
         let scene = SCNScene()
         sceneView.scene = scene
         //sceneView.autoenablesDefaultLighting = true
@@ -26,11 +23,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let node = SCNNode()
         node.geometry = SCNBox(width: 0.3, height: 0.3, length: 0.3, chamferRadius: 0.3)
         node.geometry?.firstMaterial?.diffuse.contents = UIColor(hue: 0.5, saturation: 1, brightness: 1, alpha: 0.0)
-        //node.geometry = SCNCylinder(radius: 0.05, height: 0.5)
-        //node.position = SCNVector3(0, 0, -3)
-        //node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-        //node.filters = addBloom()
-        //sceneView.scene.rootNode.addChildNode(node)
+        node.position = SCNVector3(0, 0, -0.7)
+
         
         let textNode1 = SCNNode()
         let textGeo1 = SCNText(string: "MASAO",extrusionDepth: 1)
@@ -44,8 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let h1 = Float(max1.y - min1.y)
         textNode1.pivot = SCNMatrix4MakeTranslation(w1/2 + min1.x, h1/2 + min1.y, 0)
         textNode1.scale = SCNVector3(0.01,0.01,0.01)
-        //textNode1.filters = addBloom()
-        //sceneView.scene.rootNode.addChildNode(textNode1)
+
         
         let textNode2 = SCNNode()
         let textGeo2 = SCNText(string: "MASAO",extrusionDepth: 1)
@@ -58,44 +51,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let w2 = Float(max2.x - min2.x)
         let h2 = Float(max2.y - min2.y)
         textNode2.pivot = SCNMatrix4MakeTranslation(w2/2 + min2.x, h2/2 + min2.y, 0)
-        textNode2.filters = addBloom2()
+        textNode2.filters = addBloom()
         textNode2.scale = SCNVector3(0.01,0.01,0.01)
-        //sceneView.scene.rootNode.addChildNode(textNode2)
         
         node.addChildNode(textNode1)
         node.addChildNode(textNode2)
         sceneView.scene.rootNode.addChildNode(node)
         
         let rotate = SCNAction.rotate(by: 2 * .pi, around: SCNVector3(0, 1, 0), duration: 5)
-        //(angle: 2 * .pi, axis:SCNVector3(0, 0, -0.5), duration: 5)
-        //rotate.timingMode = .easeInEaseOut
-        node.runAction(SCNAction.repeatForever(rotate))
+        //node.runAction(SCNAction.repeatForever(rotate))
         
     }
     
-    func addBloom1() -> [CIFilter]? {
-        let filter = CIFilter(name: "CIGaussianBlur")!
-        filter.setValue(20, forKey: kCIInputRadiusKey)
-        
-        return [filter]
-    }
-    
-    func addBloom2() -> [CIFilter]? {
+    func addBloom() -> [CIFilter]? {
         let bloomFilter = CIFilter(name:"CIBloom")!
         bloomFilter.setValue(6.0, forKey: "inputIntensity")
         bloomFilter.setValue(15.0, forKey: "inputRadius")
         return [bloomFilter]
     }
-    
-//    @IBAction func switchLight(_ sender: Any) {
-//        for node in sceneView.scene.rootNode.childNodes{
-//            if node.filters == nil {
-//                node.filters = addBloom()
-//            }else{
-//                node.filters = nil
-//            }
-//        }
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
