@@ -22,12 +22,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     
         //let text = "안녕히가세요"
         //let text = "دَرَّسَ"
-        //let text = "教える"
-        let text = "まさお"
+        let text = "MASAO"
         
         let textGeo1 = SCNText(string: text,extrusionDepth: 1)
         textGeo1.firstMaterial?.diffuse.contents = UIColor(hue: 0.5, saturation: 0.1, brightness: 1, alpha: 1)
-        //textGeo1.font = UIFont(name: "HiraginoSans-W6", size: 1);
         
         let textNode1 = SCNNode()
         textNode1.geometry = textGeo1
@@ -41,7 +39,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         let textGeo2 = SCNText(string: text,extrusionDepth: 1)
         textGeo2.firstMaterial?.diffuse.contents = UIColor(hue: 0.5, saturation: 1, brightness: 1, alpha: 0.8)
-        //textGeo2.font = UIFont(name: "HiraginoSans-W6", size: 1);
         
         let textNode2 = textNode1.clone()
         textNode2.geometry = textGeo2
