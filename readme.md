@@ -1,3 +1,3 @@
-# neon object in arkit
+# neon object 　 in arkit
 
-<img src="./arkit-neon.gif" width="300">
+![neon](./arkit-neon.jpeg)
